@@ -45,9 +45,13 @@ program.command('list <archive>')
   .alias('l')
   .description('list files of asar archive')
   .option('-i, --is-pack', 'each file in the asar is pack or unpack')
+  .option('-iff, --ignore-fake-file', 'skip fake file item')
+  .option('--max-file-size', 'max file size, if biger ignore it')
   .action(function (archive, options) {
     options = {
-      isPack: options.isPack
+      isPack: options.isPack,
+      ignoreFakeFile: options.isPack ? false : options.ignoreFakeFile,
+      maxFileSize : options.maxFileSize
     }
     var files = asar.listPackage(archive, options)
     for (var i in files) {
@@ -66,8 +70,16 @@ program.command('extract-file <archive> <filename>')
 program.command('extract <archive> <dest>')
   .alias('e')
   .description('extract archive')
-  .action(function (archive, dest) {
-    asar.extractAll(archive, dest)
+  .option('-iff, --ignore-fake-file', 'skip fake file item')
+  .option('-iu, --ignore-unpack', 'skip unpack file item')
+  .option('--max-file-size', 'max file size, if biger ignore it')
+  .action(function (archive, dest, options) {
+    options = {
+      ignoreFakeFile: options.ignoreFakeFile,
+      ignoreUnpack : options.ignoreUnpack,
+      maxFileSize : options.maxFileSize
+    }
+    asar.extractAll(archive, dest, options)
   })
 
 program.command('*')
