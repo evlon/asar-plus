@@ -1,7 +1,7 @@
 {
   "name": "asar-plus",
   "description": "Creating Electron app packages",
-  "version": "0.0.0-development",
+  "version": "0.0.1",
   "main": "./lib/asar.js",
   "types": "./lib/index.d.ts",
   "bin": "./bin/asar.js",

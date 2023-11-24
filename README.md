@@ -1,4 +1,35 @@
-# @electron/asar - Electron Archive
+# evlon/asar-plus - Electron Archive
+
+## 添加功能
+
+我目前的解决方案，是修改 asar 命令，添加如下功能选项
+
+### 1. 添加选项 --max-file-size ，限制文件最大数量
+
+### 2. 添加选项 --ignore-fake-file, 自动去除乱文件，即没有头，没有尾巴的虚假文件
+
+### 3. 添加选项 --ignore-unpack，有些文件是外连的，不接呀
+
+```shell
+$ node bin/asar.js e -h
+Usage: asar extract|e [options] <archive> <dest>
+
+extract archive
+
+Options:
+  -iff, --ignore-fake-file  skip fake file item
+  -iu, --ignore-unpack      skip unpack file item
+  --max-file-size           max file size, if biger ignore it
+  -h, --help                display help for command
+```
+
+## 使用方法
+
+```shell
+$ mkdir ./app
+$ node ./bin/asar.js e -iff -iu app.asar ./app/
+```
+
 
 [![CircleCI build status](https://circleci.com/gh/electron/asar/tree/main.svg?style=shield)](https://circleci.com/gh/electron/asar/tree/main)
 [![npm version](http://img.shields.io/npm/v/@electron/asar.svg)](https://npmjs.org/package/@electron/asar)
